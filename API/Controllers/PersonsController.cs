@@ -1,4 +1,5 @@
-﻿using Application.Person.Create;
+﻿using Application.Models.Person;
+using Application.Person.Create;
 using Application.Person.Delete;
 using Application.Person.GetById;
 using Application.Person.Search;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,6 +14,6 @@ namespace Application.Models.Paging
     [Range(0, int.MaxValue)]
     public int Skip { get; set; } = 0;
     [Range(1, 10)]
-    public int Take { get; set; } = 5;
+    public int Take { get; set; } = Constants.PAGE_SIZE;
   }
 }

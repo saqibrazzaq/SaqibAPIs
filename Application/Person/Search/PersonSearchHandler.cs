@@ -48,6 +48,7 @@ namespace Application.Person.Search
       var totalRows = entities.Count();
 
       entities = entities.Include(x => x.State.Country)
+        .OrderBy(x => x.FirstName)
         .Skip(request.req.Skip)
         .Take(request.req.Take);
 

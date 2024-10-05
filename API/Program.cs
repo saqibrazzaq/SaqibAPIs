@@ -1,7 +1,9 @@
 using API.Extensions;
 using API.Logger;
 using Application;
+using Application.Common;
 using Infrastructure;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +14,18 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(config =>
+{
+  config.RespectBrowserAcceptHeader = true;
+  config.ReturnHttpNotAcceptable = true;
+}).AddJsonOptions(x =>
+{
+  //x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+  //x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+  //x.JsonSerializerOptions.WriteIndented = true;
+  //x.JsonSerializerOptions.Converters.Add(new api.Utility.DateTimeConverter());
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

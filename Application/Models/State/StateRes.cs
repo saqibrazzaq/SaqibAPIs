@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Models.Country;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace Application.Models.State
     public string? Name { get; set; }
 
     public int? CountryId { get; set; }
+    public CountryRes? Country { get; set; }
   }
 }

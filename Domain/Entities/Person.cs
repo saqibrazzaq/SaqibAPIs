@@ -25,7 +25,6 @@ namespace Domain.Entities
     public string? Notes { get; set; } = string.Empty;
     public string? ImageUrl { get; set; } = string.Empty;
     public bool IsActive { get; set; } = true;
-    [MaxLength(1)]
     public string? Gender { get; set; } = string.Empty;
     public string? City { get; set; } = string.Empty;
 

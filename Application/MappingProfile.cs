@@ -1,6 +1,7 @@
 ﻿using Application.Country.Create;
 using Application.Country.Update;
 using Application.Models.Country;
+using Application.Models.Dropdown;
 using Application.Models.Paging;
 using Application.Models.Person;
 using Application.Models.State;
@@ -42,6 +43,11 @@ namespace Application
       CreateMap<Domain.Entities.Person, PersonRes>();
       CreateMap<PersonCreateParams, Domain.Entities.Person>();
       CreateMap<PersonUpdateParams, Domain.Entities.Person>();
+
+      // Dropdowns
+      CreateMap<Domain.Entities.State, DropdownRes>()
+        .ForMember(d => d.Value, opt => opt.MapFrom(src => src.Id))
+        .ForMember(d => d.Label, opt => opt.MapFrom(src => src.Name + ", " + src.Country.Name));
     }
   }
 }

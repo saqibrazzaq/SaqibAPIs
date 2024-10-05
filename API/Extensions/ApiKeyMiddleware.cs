@@ -22,7 +22,7 @@ namespace API.Extensions
         if (!context.Request.Headers.TryGetValue("X_API_KEY", out var extractedApiKey))
         {
           //context.Response.StatusCode = 401;
-          //await context.Response.WriteAsync("API Key is required.");
+          //await context.Response.WriteAsync("API Value is required.");
           throw new Exception("X_API_KEY is required in header.");
           //return;
         }
