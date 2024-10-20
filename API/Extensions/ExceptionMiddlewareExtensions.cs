@@ -28,11 +28,9 @@ namespace API.Extensions
             };
             logger.LogError($"Error: {contextFeature.Error}");
 
-            await context.Response.WriteAsync(new ErrorDetails()
-            {
-              StatusCode = context.Response.StatusCode,
-              Message = contextFeature.Error.Message
-            }.ToString());
+            await context.Response.WriteAsync(
+              new ErrorDetails(context.Response.StatusCode, contextFeature.Error.Message)
+              .ToString());
           }
         });
       });

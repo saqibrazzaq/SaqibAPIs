@@ -49,8 +49,8 @@ namespace Application.Person.Search
 
       entities = entities.Include(x => x.State.Country)
         .OrderBy(x => x.FirstName)
-        .Skip(request.req.Skip)
-        .Take(request.req.Take);
+        .Skip(request.req.PageIndex * request.req.PageSize)
+        .Take(request.req.PageSize);
 
       var pagedRes = new PagedResponse<Domain.Entities.Person>(totalRows, entities.ToList());
       return Task.FromResult(_mapper.Map<PagedResponseDto<PersonSearchRes>>(pagedRes));

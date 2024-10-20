@@ -40,8 +40,8 @@ namespace Application.State.Search
       var totalRows = entities.Count();
 
       entities = entities.Include(x => x.Country)
-        .Skip(request.req.Skip)
-        .Take(request.req.Take);
+        .Skip(request.req.PageIndex * request.req.PageSize)
+        .Take(request.req.PageSize);
 
       var pagedRes = new PagedResponse<Domain.Entities.State>(totalRows, entities.ToList());
       return Task.FromResult(_mapper.Map<PagedResponseDto<StateSearchRes>>(pagedRes));

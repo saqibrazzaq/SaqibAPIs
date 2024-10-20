@@ -12,8 +12,9 @@ namespace Application.Models.Paging
   {
     public string? SearchText { get; set; } = string.Empty;
     [Range(0, int.MaxValue)]
-    public int Skip { get; set; } = 0;
+    public int PageIndex { get; set; } = 0;
     [Range(1, 10)]
-    public int Take { get; set; } = Constants.PAGE_SIZE;
+    public int PageSize { get; set; } = Constants.PAGE_SIZE;
+
   }
 }

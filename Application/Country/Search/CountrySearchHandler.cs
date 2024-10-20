@@ -55,8 +55,8 @@ LEFT JOIN State s ON c.Id = s.CountryId WHERE 1=1
       }
 
       // Rows query with skip and fetch
-      sqlRows += sqlCondition + sqlGroupBy + sqlOrderBy + @"OFFSET @Skip ROWS
-FETCH NEXT @Take ROWS ONLY";
+      sqlRows += sqlCondition + sqlGroupBy + sqlOrderBy + @"OFFSET (@PageIndex * @PageSize) ROWS
+FETCH NEXT @PageSize ROWS ONLY";
 
       Console.WriteLine(sqlRows);
 
