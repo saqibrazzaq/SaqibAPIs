@@ -28,5 +28,6 @@ namespace Functions.Countries
       await _mediator.Send(new CountryDeleteQuery(reqParams));
       return new NoContentResult();
     }
+
   }
 }
