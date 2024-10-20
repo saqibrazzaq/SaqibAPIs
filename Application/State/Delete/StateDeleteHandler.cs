@@ -1,4 +1,5 @@
-﻿using Infrastructure.Repository;
+﻿using Application.Models.Exceptions;
+using Infrastructure.Repository;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Application.State.Delete
       var entity = _rep.StateRepository.FindAll(true)
         .Where(x => x.Id == request.req.Id)
         .FirstOrDefault();
-      if (entity == null) throw new Exception($"No state found with id {request.req.Id}");
+      if (entity == null) throw new NotFoundException($"No state found with id {request.req.Id}");
 
       Validate(request.req);
 
@@ -36,7 +37,7 @@ namespace Application.State.Delete
       var personExists = _rep.PersonRepository.FindAll()
         .Where(x => x.StateId == req.Id)
         .Any();
-      if (personExists) throw new Exception($"Cannot delete state which has people.");
+      if (personExists) throw new BadRequestException($"Cannot delete state which has people.");
     }
   }
 }

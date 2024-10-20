@@ -20,8 +20,9 @@ namespace Functions.Countries
     }
 
     [Function("Countries_GetById")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Countries/getbyid/{id}")] 
-    HttpRequest req)
+    public async Task<IActionResult> Run(
+      [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Countries/getbyid/{id}")] 
+      HttpRequest req)
     {
       var reqParams = AzureUtility.DictionaryToModel<CountryGetByIdParams>(req.RouteValues.ToDictionary());
       var res = await _mediator.Send(new CountryGetByIdQuery(reqParams));

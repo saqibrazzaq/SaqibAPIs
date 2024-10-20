@@ -1,4 +1,5 @@
-﻿using Application.Models.State;
+﻿using Application.Models.Exceptions;
+using Application.Models.State;
 using AutoMapper;
 using Infrastructure.Repository;
 using MediatR;
@@ -26,7 +27,7 @@ namespace Application.State.Update
       var entity = _rep.StateRepository.FindAll(true)
         .Where(x => x.Id == request.req.Id)
         .FirstOrDefault();
-      if (entity == null) throw new Exception($"No state found with id {request.req.Id}");
+      if (entity == null) throw new NotFoundException($"No state found with id {request.req.Id}");
 
       Validate(request.req);
 
@@ -41,7 +42,7 @@ namespace Application.State.Update
         .Where(x => x.CountryId == req.CountryId && x.Id != req.Id && x.Name == req.Name)
         .Any();
       if (nameExistsInSameCountry) 
-        throw new Exception($"State name {req.Name} already exists in the same country.");
+        throw new BadRequestException($"State name {req.Name} already exists in the same country.");
     }
   }
 }

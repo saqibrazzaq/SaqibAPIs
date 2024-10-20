@@ -1,4 +1,5 @@
-﻿using Infrastructure.Repository;
+﻿using Application.Models.Exceptions;
+using Infrastructure.Repository;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Application.Country.Delete
       var entity = _rep.CountryRepository.FindAll()
         .Where(x => x.Id == request.req.Id)
         .FirstOrDefault();
-      if (entity == null) throw new Exception($"No country found with id {request.req.Id}");
+      if (entity == null) throw new NotFoundException($"No country found with id {request.req.Id}");
 
       Validate(request);
 
@@ -36,7 +37,7 @@ namespace Application.Country.Delete
       var statesExist = _rep.StateRepository.FindAll()
         .Where(x => x.CountryId == request.req.Id)
         .Any();
-      if (statesExist) throw new Exception($"Cannot delete country with 1 or more states.");
+      if (statesExist) throw new BadRequestException($"Cannot delete country with 1 or more states.");
     }
   }
 }

@@ -40,7 +40,7 @@ namespace Application.Country.Create
         .Any();
       if (nameExists)
       {
-        throw new Exception($"Country name {req.Name} already exists.");
+        throw new BadRequestException($"Country name {req.Name} already exists.");
       }
 
       var codeExists = _rep.CountryRepository.FindAll()
@@ -48,7 +48,7 @@ namespace Application.Country.Create
         .Any();
       if (codeExists)
       {
-        throw new Exception($"Country code {req.Code} already exists.");
+        throw new BadRequestException($"Country code {req.Code} already exists.");
       }
     }
   }

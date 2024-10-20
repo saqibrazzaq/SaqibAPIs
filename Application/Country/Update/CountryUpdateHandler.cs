@@ -1,4 +1,5 @@
 ﻿using Application.Models.Country;
+using Application.Models.Exceptions;
 using AutoMapper;
 using Infrastructure.Repository;
 using MediatR;
@@ -26,7 +27,7 @@ namespace Application.Country.Update
       var entity = _rep.CountryRepository.FindAll(true)
         .Where(x => x.Id == request.req.Id)
         .FirstOrDefault();
-      if (entity == null) throw new Exception($"No country found with id {request.req.Id}");
+      if (entity == null) throw new NotFoundException($"No country found with id {request.req.Id}");
 
       Validate(request.req);
 
@@ -40,12 +41,12 @@ namespace Application.Country.Update
       var nameExists = _rep.CountryRepository.FindAll()
         .Where(x => x.Name == req.Name && x.Id != req.Id)
         .Any();
-      if (nameExists) throw new Exception($"Country name {req.Name} already exists.");
+      if (nameExists) throw new BadRequestException($"Country name {req.Name} already exists.");
 
       var codeExists = _rep.CountryRepository.FindAll()
         .Where(x => x.Code == req.Code && x.Id != req.Id)
         .Any();
-      if (codeExists) throw new Exception($"Country code {req.Code} already exists.");
+      if (codeExists) throw new BadRequestException($"Country code {req.Code} already exists.");
     }
   }
 }

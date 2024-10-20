@@ -38,13 +38,23 @@ namespace Functions.Middleware
             context.GetInvocationResult().Value = res;
             break;
 
+          case BadRequestException ex:
+            logger.LogError(exception.Message);
+            req = await context.GetHttpRequestDataAsync();
+            res = req!.CreateResponse();
+            res.StatusCode = HttpStatusCode.InternalServerError;
+
+            await res.WriteAsJsonAsync(new ErrorDetails(500, ex.Message), res.StatusCode);
+            context.GetInvocationResult().Value = res;
+            break;
+
           case NotFoundException ex:
             logger.LogError(exception.Message);
             req = await context.GetHttpRequestDataAsync();
             res = req!.CreateResponse();
             res.StatusCode = HttpStatusCode.NotFound;
 
-            await res.WriteAsJsonAsync(new ErrorDetails(404, ex.Message));
+            await res.WriteAsJsonAsync(new ErrorDetails(404, ex.Message), res.StatusCode);
             context.GetInvocationResult().Value = res;
             break;
 
@@ -56,7 +66,7 @@ namespace Functions.Middleware
             res.StatusCode = HttpStatusCode.InternalServerError;
 
             //await res.WriteStringAsync("Internal service error. Please contact an administrator");
-            await res.WriteAsJsonAsync(new ErrorDetails(500, exception.Message));
+            await res.WriteAsJsonAsync(new ErrorDetails(500, exception.Message), res.StatusCode);
             context.GetInvocationResult().Value = res;
             break;
         }

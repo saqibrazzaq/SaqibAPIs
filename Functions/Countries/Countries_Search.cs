@@ -26,7 +26,7 @@ namespace Functions.Countries
         [Function("Countries_search")]
         public async Task<IActionResult> Search(
           [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Countries/search")]
-    HttpRequest req)
+          HttpRequest req)
         {
             var reqParams = AzureUtility.QueryStringToModel<CountrySearchParams>(req.QueryString.Value);
             var res = await _mediator.Send(new CountrySearchQuery(reqParams));

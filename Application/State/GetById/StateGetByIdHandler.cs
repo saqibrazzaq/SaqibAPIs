@@ -1,4 +1,5 @@
-﻿using Application.Models.State;
+﻿using Application.Models.Exceptions;
+using Application.Models.State;
 using AutoMapper;
 using Infrastructure.Repository;
 using MediatR;
@@ -27,7 +28,7 @@ namespace Application.State.GetById
         .Where(x => x.Id == request.req.Id)
         .FirstOrDefault();
 
-      if (entity == null) throw new Exception($"No state found with id {request.req.Id}");
+      if (entity == null) throw new NotFoundException($"No state found with id {request.req.Id}");
 
       return Task.FromResult(_mapper.Map<StateRes>(entity));
     }

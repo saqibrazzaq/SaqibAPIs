@@ -1,4 +1,5 @@
-﻿using Application.Models.State;
+﻿using Application.Models.Exceptions;
+using Application.Models.State;
 using AutoMapper;
 using Infrastructure.Repository;
 using MediatR;
@@ -38,7 +39,7 @@ namespace Application.State.Create
         .Any();
 
       if (nameExistsInSameCountry) 
-        throw new Exception($"State {request.req.Name} already exists in this country.");
+        throw new BadRequestException($"State {request.req.Name} already exists in this country.");
     }
   }
 }
