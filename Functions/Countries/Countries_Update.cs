@@ -21,7 +21,7 @@ namespace Functions.Countries
     }
 
     [Function("Countries_Update")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "put", Route = "Countries/update")]
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "Countries/update")]
         HttpRequest req)
     {
       var reqParams = await AzureUtility.BodyToModel<CountryUpdateParams>(req.Body);

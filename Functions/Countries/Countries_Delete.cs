@@ -21,7 +21,7 @@ namespace Functions.Countries
     }
 
     [Function("Countries_Delete")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "delete", Route = "Countries/delete/{id}")]
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "Countries/delete/{id}")]
         HttpRequest req)
     {
       var reqParams = AzureUtility.DictionaryToModel<CountryDeleteParams>(req.RouteValues.ToDictionary());

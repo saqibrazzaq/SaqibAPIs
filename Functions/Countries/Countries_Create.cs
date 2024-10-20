@@ -22,7 +22,7 @@ namespace Functions.Countries
 
     [Function("Countries_Create")]
     public async Task<IActionResult> Run(
-      [HttpTrigger(AuthorizationLevel.Function, "post", Route = "Countries/create")]
+      [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Countries/create")]
       HttpRequest req)
     {
       var reqParams = await AzureUtility.BodyToModel<CountryCreateParams>(req.Body);
