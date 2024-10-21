@@ -20,7 +20,7 @@ namespace API.Controllers
     [HttpGet("state")]
     public async Task<IActionResult> GetStates([FromQuery] DropdownParams req)
     {
-      var res = await _mediator.Send(new DropdownQuery(req));
+      var res = await _mediator.Send(new StateDropdownQuery(req));
       return Ok(res);
     }
   }

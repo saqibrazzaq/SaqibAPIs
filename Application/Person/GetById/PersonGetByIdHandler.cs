@@ -1,4 +1,5 @@
-﻿using Application.Models.Person;
+﻿using Application.Models.Exceptions;
+using Application.Models.Person;
 using AutoMapper;
 using Infrastructure.Repository;
 using MediatR;
@@ -26,7 +27,7 @@ namespace Application.Person.GetById
       var entity = _rep.PersonRepository.FindAll()
         .Where(x => x.Id == request.req.Id)
         .FirstOrDefault();
-      if (entity == null) throw new Exception($"No person found with id {request.req.Id}");
+      if (entity == null) throw new NotFoundException($"No person found with id {request.req.Id}");
 
       return Task.FromResult(_mapper.Map<PersonRes>(entity));
     }

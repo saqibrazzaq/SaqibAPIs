@@ -1,4 +1,5 @@
-﻿using Application.Models.Person;
+﻿using Application.Models.Exceptions;
+using Application.Models.Person;
 using AutoMapper;
 using Infrastructure.Repository;
 using MediatR;
@@ -36,7 +37,7 @@ namespace Application.Person.Create
       var emailExists = _rep.PersonRepository.FindAll()
         .Where(x => x.Email == req.Email)
         .Any();
-      if (emailExists) throw new Exception($"Email address {req.Email} already exists.");
+      if (emailExists) throw new BadRequestException($"Email address {req.Email} already exists.");
     }
   }
 }

@@ -1,4 +1,5 @@
-﻿using Application.Models.Person;
+﻿using Application.Models.Exceptions;
+using Application.Models.Person;
 using AutoMapper;
 using Infrastructure.Repository;
 using MediatR;
@@ -26,7 +27,7 @@ namespace Application.Person.Update
       var entity = _rep.PersonRepository.FindAll(true)
         .Where(x => x.Id == request.req.Id)
         .FirstOrDefault();
-      if (entity == null) throw new Exception($"No person found with id {request.req.Id}");
+      if (entity == null) throw new NotFoundException($"No person found with id {request.req.Id}");
 
       Validate(request.req);
 
@@ -40,7 +41,7 @@ namespace Application.Person.Update
       var emailExists = _rep.PersonRepository.FindAll()
         .Where(x => x.Id != req.Id && x.Email == req.Email)
         .Any();
-      if (emailExists) throw new Exception($"Email {req.Email} already exists.");
+      if (emailExists) throw new BadRequestException($"Email {req.Email} already exists.");
     }
   }
 }

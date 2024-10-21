@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Application.Dropdowns.State
 {
     public class StateDropdownHandler
-    : IRequestHandler<DropdownQuery, List<DropdownRes>>
+    : IRequestHandler<StateDropdownQuery, List<DropdownRes>>
     {
         private readonly IRepositoryManager _rep;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace Application.Dropdowns.State
             _mapper = mapper;
         }
 
-        public Task<List<DropdownRes>> Handle(DropdownQuery request, CancellationToken cancellationToken)
+        public Task<List<DropdownRes>> Handle(StateDropdownQuery request, CancellationToken cancellationToken)
         {
             var entities = _rep.StateRepository.FindAll();
 
