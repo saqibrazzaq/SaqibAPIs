@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Application.Models.Paging
@@ -12,9 +13,11 @@ namespace Application.Models.Paging
   {
     public string? SearchText { get; set; } = string.Empty;
     [Range(0, int.MaxValue)]
-    public int PageIndex { get; set; } = 0;
+    [JsonConverter(typeof(NullableIntConverter))]
+    public int? PageIndex { get; set; } = 0;
     [Range(1, 10)]
-    public int PageSize { get; set; } = Constants.PAGE_SIZE;
+    [JsonConverter(typeof(NullableIntConverter))]
+    public int? PageSize { get; set; } = Constants.PAGE_SIZE;
 
   }
 }

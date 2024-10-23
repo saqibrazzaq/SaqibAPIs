@@ -1,4 +1,5 @@
-﻿using Application.Models.Paging;
+﻿using Application.Common;
+using Application.Models.Paging;
 using Application.Models.Person;
 using AutoMapper;
 using Domain.Entities;
@@ -49,8 +50,8 @@ namespace Application.Person.Search
 
       entities = entities.Include(x => x.State.Country)
         .OrderBy(x => x.FirstName)
-        .Skip(request.req.PageIndex * request.req.PageSize)
-        .Take(request.req.PageSize);
+        .Skip((request.req.PageIndex ?? 0) * (request.req.PageSize ?? Constants.PAGE_SIZE))
+        .Take(request.req.PageSize ?? Constants.PAGE_SIZE);
 
       var pagedRes = new PagedResponse<Domain.Entities.Person>(totalRows, entities.ToList());
       return Task.FromResult(_mapper.Map<PagedResponseDto<PersonSearchRes>>(pagedRes));

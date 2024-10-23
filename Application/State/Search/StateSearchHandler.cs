@@ -1,4 +1,5 @@
-﻿using Application.Models.Paging;
+﻿using Application.Common;
+using Application.Models.Paging;
 using Application.Models.State;
 using AutoMapper;
 using Domain.Entities;
@@ -40,8 +41,8 @@ namespace Application.State.Search
       var totalRows = entities.Count();
 
       entities = entities.Include(x => x.Country)
-        .Skip(request.req.PageIndex * request.req.PageSize)
-        .Take(request.req.PageSize);
+        .Skip((request.req.PageIndex ?? 0) * (request.req.PageSize ?? Constants.PAGE_SIZE))
+        .Take(request.req.PageSize ?? Constants.PAGE_SIZE);
 
       var pagedRes = new PagedResponse<Domain.Entities.State>(totalRows, entities.ToList());
       return Task.FromResult(_mapper.Map<PagedResponseDto<StateSearchRes>>(pagedRes));

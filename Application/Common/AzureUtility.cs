@@ -20,7 +20,8 @@ namespace Application.Common
                  );
       var model = JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions
       {
-        NumberHandling = JsonNumberHandling.AllowReadingFromString
+        NumberHandling = JsonNumberHandling.AllowReadingFromString,
+        PropertyNameCaseInsensitive = true
       });
       return model;
     }
