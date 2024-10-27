@@ -48,6 +48,9 @@ namespace Application
       CreateMap<Domain.Entities.State, DropdownRes>()
         .ForMember(d => d.Value, opt => opt.MapFrom(src => src.Id))
         .ForMember(d => d.Label, opt => opt.MapFrom(src => src.Name + ", " + src.Country.Name));
+      CreateMap<Domain.Entities.Country, DropdownRes>()
+        .ForMember(d => d.Value, opt => opt.MapFrom(src => src.Id))
+        .ForMember(d => d.Label, opt => opt.MapFrom(src => src.Name));
     }
   }
 }
