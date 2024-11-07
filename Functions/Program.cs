@@ -1,6 +1,8 @@
 using Application;
 using Azure.Identity;
+using Azure.Storage.Queues;
 using AzureServices;
+using Common;
 using Functions.Middleware;
 using Google.Protobuf.WellKnownTypes;
 using Infrastructure;
@@ -36,8 +38,13 @@ var host = new HostBuilder()
       services.AddAzureClients(clientBuilder =>
       {
         // Register clients for each service
-        clientBuilder.AddSecretClient(
-        appBuilder.Configuration.GetSection("KeyVault"));
+        clientBuilder.AddSecretClient(configuration.GetSection("KeyVault"));
+        clientBuilder.AddClient<QueueClient, QueueClientOptions>((_, _, _) =>
+        {
+          var connectionString = configuration["AzureWebJobsStorage"];
+          var queueName = Constants.MESSAGE_QUEUE_NAME;
+          return new QueueClient(connectionString, queueName);
+        });
 
         // Set a credential for all clients to use by default
         DefaultAzureCredential credential = new();

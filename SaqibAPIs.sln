@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functions", "Functions\Functions.csproj", "{C640DC9C-D019-4EE8-A7F1-B2885786A292}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureServices", "AzureServices\AzureServices.csproj", "{ADFEBA62-610E-4FC5-AD6B-083B868CD796}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureServices", "AzureServices\AzureServices.csproj", "{ADFEBA62-610E-4FC5-AD6B-083B868CD796}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{38791F6C-01F4-4979-B696-FC1436BB9C1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{38791F6C-01F4-4979-B696-FC1436BB9C1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
