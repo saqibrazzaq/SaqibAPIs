@@ -47,8 +47,8 @@ var host = new HostBuilder()
         //});
 
         // Set a credential for all clients to use by default
-        //DefaultAzureCredential credential = new();
-        //clientBuilder.UseCredential(credential);
+        DefaultAzureCredential credential = new();
+        clientBuilder.UseCredential(credential);
       });
     })
     .Build();
