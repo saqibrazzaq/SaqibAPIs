@@ -39,12 +39,12 @@ var host = new HostBuilder()
       {
         // Register clients for each service
         clientBuilder.AddSecretClient(configuration.GetSection("KeyVault"));
-        clientBuilder.AddClient<QueueClient, QueueClientOptions>((_, _, _) =>
-        {
-          var connectionString = configuration["AzureWebJobsStorage"];
-          var queueName = Constants.MESSAGE_QUEUE_NAME;
-          return new QueueClient(connectionString, queueName);
-        });
+        //clientBuilder.AddClient<QueueClient, QueueClientOptions>((_, _, _) =>
+        //{
+        //  var connectionString = configuration["AzureWebJobsStorage"];
+        //  var queueName = Constants.MESSAGE_QUEUE_NAME;
+        //  return new QueueClient(connectionString, queueName);
+        //});
 
         // Set a credential for all clients to use by default
         DefaultAzureCredential credential = new();
