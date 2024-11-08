@@ -38,7 +38,7 @@ var host = new HostBuilder()
       services.AddAzureClients(clientBuilder =>
       {
         // Register clients for each service
-        clientBuilder.AddSecretClient(configuration.GetSection("KeyVault"));
+        //clientBuilder.AddSecretClient(configuration.GetSection("KeyVault"));
         //clientBuilder.AddClient<QueueClient, QueueClientOptions>((_, _, _) =>
         //{
         //  var connectionString = configuration["AzureWebJobsStorage"];
