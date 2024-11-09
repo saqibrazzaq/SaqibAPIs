@@ -33,7 +33,7 @@ var host = new HostBuilder()
 
       services.ConfigureApplicationServices();
       services.ConfigureInfrastructureServices(configuration);
-      services.ConfigureAzureServices();
+      //services.ConfigureAzureServices();
 
       //services.AddAzureClients(clientBuilder =>
       //{
