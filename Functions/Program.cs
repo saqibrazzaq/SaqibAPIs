@@ -33,23 +33,23 @@ var host = new HostBuilder()
 
       services.ConfigureApplicationServices();
       services.ConfigureInfrastructureServices(configuration);
-      //services.ConfigureAzureServices();
+      services.ConfigureAzureServices();
 
-      //services.AddAzureClients(clientBuilder =>
-      //{
-      //  // Register clients for each service
-      //  //clientBuilder.AddSecretClient(configuration.GetSection("KeyVault"));
-      //  //clientBuilder.AddClient<QueueClient, QueueClientOptions>((_, _, _) =>
-      //  //{
-      //  //  var connectionString = configuration["AzureWebJobsStorage"];
-      //  //  var queueName = Constants.MESSAGE_QUEUE_NAME;
-      //  //  return new QueueClient(connectionString, queueName);
-      //  //});
+      services.AddAzureClients(clientBuilder =>
+      {
+        // Register clients for each service
+        clientBuilder.AddSecretClient(configuration.GetSection("KeyVault"));
+        clientBuilder.AddClient<QueueClient, QueueClientOptions>((_, _, _) =>
+        {
+          var connectionString = configuration["AzureWebJobsStorage"];
+          var queueName = Constants.MESSAGE_QUEUE_NAME;
+          return new QueueClient(connectionString, queueName);
+        });
 
-      //  // Set a credential for all clients to use by default
-      //  //DefaultAzureCredential credential = new();
-      //  //clientBuilder.UseCredential(credential);
-      //});
+        // Set a credential for all clients to use by default
+        DefaultAzureCredential credential = new();
+        clientBuilder.UseCredential(credential);
+      });
     })
     .Build();
 
